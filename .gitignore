@@ -47,7 +47,5 @@
 !.emacs.d/
 !.emacs.d/init.el
 !.emacs.d/shell-init.el
-!.emacs.d/elpa
-!.emacs.d/elpa/*
 !.emacs.d/org-config
 !.emacs.d/org-config/*
