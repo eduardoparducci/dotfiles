@@ -1,9 +1,6 @@
 # First ignoring all files
 *
 
-# README
-!README.md
-
 # Now removing from ignore list
 !.gitignore
 
