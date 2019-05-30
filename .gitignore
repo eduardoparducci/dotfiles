@@ -1,0 +1,53 @@
+# First ignoring all files
+*
+
+# README
+!README.md
+
+# Now removing from ignore list
+!.gitignore
+
+# Git
+!.gitconfig
+
+# Common folders
+!.config/
+
+# X
+!.xinitrc
+!.Xresources
+!.XCompose
+
+# Bash
+!.bashrc
+!.bash_profile
+!.bash_logout
+
+# Installed pacman apps
+!.config/.apps
+
+# rofi
+!.config/rofi/
+!.config/rofi/*
+
+# xfce4 terminal
+!.config/xfce4/terminal/terminalrc
+
+# i3
+!.config/i3/
+!.config/i3/config
+!.config/i3/scripts/
+!.config/i3/scripts/*
+!.config/i3/workspaces/
+!.config/i3/workspaces/*
+!.config/polybar/
+!.config/polybar/*
+
+# emacs
+!.emacs.d/
+!.emacs.d/init.el
+!.emacs.d/shell-init.el
+!.emacs.d/elpa
+!.emacs.d/elpa/*
+!.emacs.d/org-config
+!.emacs.d/org-config/*

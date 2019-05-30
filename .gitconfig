@@ -1,0 +1,8 @@
+[user]
+	name = Eduardo Parducci
+	email = eduardo.parducci@outlook.com
+[core]
+	editor = emacs -nw
+	quotepath = false
+[push]
+	default = simple	

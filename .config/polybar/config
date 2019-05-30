@@ -1,0 +1,471 @@
+;----------------------------------------------------------
+;			C O L O R S
+;----------------------------------------------------------
+
+[colors]
+background = #eeeeee
+foreground-alt = #215d9c
+foreground = #5c5c5c
+foreground-selected = #2c2c2c
+background-alt = #26c6da
+
+advanced = #ff9966
+network = #6699ff
+simple = #9ed0ff
+spotify = #1db954
+
+primary = #215d9c
+secondary = #e60053
+alert = #bd2c40
+
+
+;----------------------------------------------------------
+;			M A I N   B A R
+;----------------------------------------------------------
+
+[bar/main]
+monitor = "LVDS-1"
+monitor-fallback = "HDMI-1"
+width = 100%
+height = 20
+radius = 0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+padding-left = 1
+padding-right = 1
+
+module-margin-left = 0
+module-margin-right = 0
+
+;----------------------------------------------------------
+;			F O N T S
+;----------------------------------------------------------
+
+font-0 = "Roboto:size=7;1"
+font-1 = "Roboto:size=9:weight=bold;1"
+font-2 = "FontAwesome:size=10;1"
+
+;----------------------------------------------------------
+;  	    M A I N   M O D U L E    L A Y O U T
+;----------------------------------------------------------
+
+modules-left = i3
+modules-center = date
+modules-right = pulseaudio cpu memory wlan battery
+
+tray-position = right
+tray-padding = 2
+;tray-backgroud = ${colors.background}
+
+;----------------------------------------------------------
+;		B S P W M   M O D U L E
+;----------------------------------------------------------
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+;----------------------------------------------------------
+;		i 3   M O D U L E
+;----------------------------------------------------------
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; workspace icons
+ws-icon-0 = 1; 1
+ws-icon-1 = 2; 2
+ws-icon-2 = 3; 3
+ws-icon-3 = 4; 4
+ws-icon-4 = 5; 5
+ws-icon-5 = 6; 6
+ws-icon-6 = 7;[ 7 ]
+ws-icon-7 = 8;[ 8 ]
+ws-icon-8 = 9;[ 9 ]
+ws-icon-9 = 10;[ 10 ]
+; ws-icon-default = 
+
+
+;Only show workspaces on the same output as the bar
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-foreground = ${colors.foreground}
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused-background = ${colors.foreground}
+label-focused-foreground = ${colors.background}
+label-focused = %icon%
+label-focused-underline = ${colors.simple}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %icon%
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+;----------------------------------------------------------
+;		   F I L E S Y S T E M
+;----------------------------------------------------------
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+fixed-values = true
+
+mount-0 = /
+
+format-mounted = <label-mounted>
+format-mounted-prefix = "  "
+format-mounted-foreground = ${colors.foreground}
+label-mounted = %percentage_used%%
+label-mounted-foreground = ${colors.foreground}
+label-mounted-underline = ${colors.advanced}
+label-unmounted = %mountpoint%: not mounted
+label-unmounted-foreground = ${colors.advanced}
+label-unmounted-underline = ${colors.advanced}
+
+;----------------------------------------------------------
+;			   C P U
+;----------------------------------------------------------
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+
+format-prefix = "     CPU: "
+format-foreground = ${colors.foreground}
+label = %percentage%%
+
+;----------------------------------------------------------
+;			M E M O R Y
+;----------------------------------------------------------
+
+[module/memory]
+type = internal/memory
+interval = 1
+
+format-prefix = "    RAM: "
+format-foreground = ${colors.foreground}
+format-margin-top = -5
+
+label = %percentage_used%%
+
+;----------------------------------------------------------
+;		    T E M P E R A T U R E
+;----------------------------------------------------------
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 75
+interval = 2
+
+format = <ramp> <label>
+format-warn = <ramp> <label-warn>
+format-foreground = ${colors.foreground}
+format-underline = ${colors.simple}
+format-warn-foreground = ${colors.alert}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+
+;----------------------------------------------------------
+;	      N E T W O R K   I P
+;----------------------------------------------------------
+
+[module/ip]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+format-connected-prefix = "  "
+;format-connected-prefix = " net"
+format-connected-foreground = ${colors.foreground}
+;format-connected-underline = ${colors.network}
+
+label-connected = %local_ip%
+label-connected-foreground = ${colors.foreground}
+label-connected-underline = ${colors.network}
+label-disconnected = ---
+label-disconnected-foreground = ${colors.foreground}
+label-disconnected-underline = ${colors.network}
+
+;----------------------------------------------------------
+;	      W I R E L E S S   T R A F F I C
+;----------------------------------------------------------
+
+[module/upload]
+type = internal/network
+interface = wlp2s0
+interval = 1.0
+
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+format-connected-prefix = "  "
+format-disconnected-prefix = "  "
+;format-connected-prefix = " net"
+format-connected-foreground = ${colors.foreground}
+;format-connected-underline = ${colors.network}
+
+label-connected = %upspeed%
+label-connected-foreground = ${colors.foreground}
+;label-connected-underline = ${colors.network}
+label-disconnected = ---
+label-disconnected-foreground = ${colors.foreground}
+;label-disconnected-underline = ${colors.network}
+
+[module/download]
+type = internal/network
+interface = wlp2s0
+interval = 1.0
+
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+format-connected-prefix = "  "
+format-disconnected-prefix = "  "
+;format-connected-prefix = " net"
+format-connected-foreground = ${colors.foreground}
+;format-connected-underline = ${colors.network}
+
+label-connected = %downspeed%
+label-connected-foreground = ${colors.foreground}
+;label-connected-underline = ${colors.network}
+label-disconnected = ---
+label-disconnected-foreground = ${colors.foreground}
+;label-disconnected-underline = ${colors.network}
+
+;----------------------------------------------------------
+;	      W I R E L E S S    N E T W O R K
+;----------------------------------------------------------
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+format-connected-prefix = "     "
+format-connected-foreground = ${colors.foreground}
+;format-connected-underline = ${colors.simple}
+format-disconnected-prefix = "     "
+format-disconnected-foreground = ${colors.foreground}
+;format-disconnected-underline = ${colors.network}
+
+label-connected = %essid%
+label-connected-foreground = ${colors.foreground}
+;label-connected-underline = ${colors.simple}
+label-disconnected = not connected
+label-disconnected-foreground = ${colors.foreground}
+;label-disconnected-underline = ${colors.network}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+
+;----------------------------------------------------------
+;			 B A T T E R Y
+;----------------------------------------------------------
+
+[module/battery]
+type = internal/battery
+; To list battery & adapter: $ ls -1 /sys/class/power_supply/
+battery = BAT1
+adapter = ADP1
+full-at = 99
+
+format-charging = <animation-charging> <label-charging>
+format-charging-foreground = ${colors.foreground}
+;format-charging-underline = ${colors.simple}
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-foreground = ${colors.foreground}
+;format-discharging-underline = ${colors.simple}
+format-full = <label-full>
+format-full-foreground = ${colors.foreground}
+;format-full-underline = ${colors.simple}
+
+label-charging = " %percentage%%"
+label-discharging = "%percentage%% "
+label-discharging-foreground = ${colors.foreground}
+label-full = "     %percentage%% "
+
+ramp-capacity-0 = "     "
+ramp-capacity-0-foreground = ${colors.alert}
+;ramp-capacity-0-underline = ${colors.alert}
+ramp-capacity-1 = "     "
+ramp-capacity-1-foreground = ${colors.alert}
+;ramp-capacity-1-underline = ${colors.alert}
+ramp-capacity-2 = "     "
+ramp-capacity-3 = "     "
+ramp-capacity-4 = "     "
+animation-charging-0 = "     "
+animation-charging-1 = "     "
+animation-charging-2 = "     "
+animation-charging-3 = "     "
+animation-charging-4 = "     "
+animation-charging-framerate = 750
+
+;----------------------------------------------------------
+;   		      E T H E R N E T
+;----------------------------------------------------------
+
+[module/eth]
+type = internal/network
+interface = eno1
+interval = 1.0
+
+format-connected-prefix = "  "
+format-foreground = ${colors.foreground}
+;format-underline = ${colors.network}
+
+label-connected = %local_ip%
+label-disconnected = %ifname% disconnected
+
+
+[module/date]
+type = internal/date
+interval = 1
+;date = "%d-%m-%Y -"
+date = " %a %d, %b %Y "
+time = %H:%M
+
+format =  <label>
+label = %date%  %time%
+label-font = 2
+
+[module/pulseaudio]
+type = internal/pulseaudio
+sink = bluez_sink.F8_DF_15_DB_51_6B.a2dp_sink
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = false
+
+; Interval for volume increase/decrease (in percent points) (unreleased)
+; Default: 5
+interval = 5
+
+; Available tags:
+;   <label-volume> (default)
+;   <ramp-volume>
+;   <bar-volume>
+format-volume = <ramp-volume> <bar-volume> <label-volume>
+; Available tags:
+;   <label-muted> (default)
+;   <ramp-volume>
+;   <bar-volume>
+;format-muted = <label-muted>
+
+; Available tokens:
+;   %percentage% (default)
+;label-volume = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+label-muted = muted
+label-muted-foreground = ${colors.alert}
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 
+bar-volume-width = 20
+bar-volume-foreground-0 = ${colors.foreground}
+bar-volume-gradient = true
+bar-volume-indicator = |
+bar-volume-indicator-font = 1
+bar-volume-fill = ■
+bar-volume-fill-font = 1
+bar-volume-empty = ■
+bar-volume-empty-font = 1
+bar-volume-empty-foreground = ${colors.background}
+
+;----------------------------------------------------------
+;		      P O W E R   M E N U
+;----------------------------------------------------------
+
+[module/powermenu]
+type = custom/menu
+
+;      » 
+label-open = " "
+label-open-font = 2
+label-open-foreground = ${colors.alert}
+label-close = " x " 
+label-close-foreground = ${colors.foreground}
+label-separator = " "
+label-separator-foreground = ${colors.foreground}
+
+; lock
+;menu-0-4 = "  "
+;menu-0-4-exec = bash ~/scripts/lock.sh
+;menu-0-4-foreground = ${colors.foreground}
+; sleep
+menu-0-3 = "  "
+menu-0-3-exec = systemctl suspend
+menu-0-3-foreground = ${colors.foreground}
+; logout
+menu-0-2 = "  "
+menu-0-2-exec = pkill x
+menu-0-2-foreground = ${colors.foreground}
+; reboot
+menu-0-1 = "  "
+menu-0-1-exec = systemctl reboot
+menu-0-1-foreground = ${colors.foreground}
+; shutdown
+menu-0-0 = "    "
+menu-0-0-exec = systemctl poweroff
+menu-0-0-foreground = ${colors.alert}
+
+;----------------------------------------------------------
+;			C U S T O M
+;----------------------------------------------------------
+[module/player-mpris-tail]
+type = custom/script
+exec = ~/.config/polybar/player-mpris-tail.py
+tail = true
+click-left = ~/.config/polybar/player-ctrl.sh play-pause
+format-underline = ${colors.spotify}
+
+;----------------------------------------------------------
+;			G L O B A L
+;----------------------------------------------------------
+
+[global/wm]
+;margin-top = 5
+;margin-bottom = 5
+
+; vim:ft=dosini
+
