@@ -17,6 +17,11 @@ fi
 export EDITOR="emacs -nw -q --load ~/.emacs.d/shell-init.el"
 
 # Emacs terminal with same color scheeme
+if [ `printenv | grep INSIDE_EMACS` ]
+then
+    alias ls='ls --color=none'
+    alias grep='grep'
+fi
 
 # enable colors in terminal
 export TERM="xterm-256color"

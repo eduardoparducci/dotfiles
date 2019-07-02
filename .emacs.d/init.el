@@ -35,18 +35,26 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector)
+ '(ansi-color-names-vector nil)
+ '(ansi-term-color-vector
+   [unspecified "#FFFFFF" "#d15120" "#5f9411" "#d2ad00" "#6b82a7" "#a66bab" "#6b82a7" "#505050"] t)
  '(custom-safe-themes
    (quote
     ("8dce5b23232d0a490f16d62112d3abff6babeef86ae3853241a85856f9b0a6e7" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "13d20048c12826c7ea636fbe513d6f24c0d43709a761052adbca052708798ce3" "e61752b5a3af12be08e99d076aedadd76052137560b7e684a8be2f8d2958edc3" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "b9a06c75084a7744b8a38cb48bc987de10d68f0317697ccbd894b2d0aca06d2b" "b9cbfb43711effa2e0a7fbc99d5e7522d8d8c1c151a3194a4b176ec17c9a8215" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "ec5f761d75345d1cf96d744c50cf7c928959f075acf3f2631742d5c9fe2153ad" "5f27195e3f4b85ac50c1e2fac080f0dd6535440891c54fcfa62cdcefedf56b1b" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "115d42fa02a5ce6a759e38b27304e833d57a48422c2408d5455f14450eb96554" default)))
  '(display-time-day-and-date t)
  '(display-time-format "%A,%e de %B %H:%M")
+ '(fci-rule-character-color "#d9d9d9")
  '(fci-rule-color "#515151")
  '(flycheck-typescript-html-config "/usr/lib/node_modules/tidy-html5/package.json")
  '(package-selected-packages
    (quote
-    (twilight-bright-theme ample-theme fill-column-indicator pdf-tools auctex moe-theme flycheck-mmark markdown-mode material-theme darktooth-theme monokai-theme tabbar-ruler tabbar grandshell-theme neotree auto-complete json-mode sass-mode web-mode typescript-mode flycheck))))
-(custom-set-faces)
+    (matlab-mode twilight-bright-theme ample-theme fill-column-indicator pdf-tools auctex moe-theme flycheck-mmark markdown-mode material-theme darktooth-theme monokai-theme tabbar-ruler tabbar grandshell-theme neotree auto-complete json-mode sass-mode web-mode typescript-mode flycheck))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 ;; add MELPA to Emacs (package manager)
 (require 'package)
@@ -232,6 +240,6 @@
 ;;(load-theme 'grandshell)
 ;;(load-theme 'tango-dark)
 ;;(load-theme 'monokai)
-(load-theme 'darktooth)
+;;(load-theme 'darktooth)
 
 ;;; init.el ends here
