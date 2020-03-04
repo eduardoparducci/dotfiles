@@ -33,12 +33,6 @@ i3lock \
 --indicator           \
 --timestr="%H:%M"  \
 --datestr="%a %d, %b %Y" \
-#--keylayout 2         \
 
-# --veriftext="Drinking verification can..."
-# --wrongtext="Nope!"
-# --textsize=20
-# --modsize=10
-# --timefont=comic-sans
-# --datefont=monofur
-# etc
+sleep 5
+xset dpms force off        

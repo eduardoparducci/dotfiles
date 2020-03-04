@@ -1,0 +1,16 @@
+;----------------------------------------------------------
+;			C O L O R S
+;----------------------------------------------------------
+
+[colors]
+background = #bbffffff
+background-alt = #aaaaaa
+foreground = #005662
+foreground-alt = #00838f
+foreground-selected = #005662
+
+;accent = #ffa726
+accent = #c77800
+alert = #ffff8d
+primary = #005662
+urgent = #d32f2f

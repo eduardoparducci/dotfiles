@@ -1,11 +1,21 @@
 set $mod Mod4
+font pango: DejaVu Sans Bold 10
+# font pango: Roboto bold 12
+# font pango:Source Code Pro Medium 15
 
-font pango: Roboto bold 9
-# font pango:Source Code Pro Medium 8
+
+###################################################################
+# Surface Features 
+###################################################################
+exec --no-startup-id "~/.config/tablet-mode/autorotate"
 
 ###################################################################
 # Keyboard
 ###################################################################
+
+# Use international us layout
+exec --no-startup-id setxkbmap -model pc104 -layout us_intl
+bindsym $mod+Shift+l exec "~/.config/i3/scripts/keyboard.sh"
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -17,7 +27,8 @@ bindsym $mod+Return exec "xfce4-terminal --hide-menubar"
 bindsym Mod1+F4 kill
 
 # lock screen
-bindsym $mod+Shift+t exec "~/.config/i3/scripts/lock.sh &"
+# bindsym $mod+Shift+t exec "~/.config/i3/scripts/lock.sh &"
+bindsym $mod+Shift+t exec sleep 1 && xset -display :0.0 dpms force off
 
 # System power menu
 bindsym $mod+Shift+p exec "~/.config/i3/scripts/sysmenu.sh &"
@@ -31,8 +42,8 @@ bindsym $mod+space exec rofi -show combi -theme LaunchMenu
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus up
-bindsym $mod+k focus down
-bindsym $mod+l focus right
+# bindsym $mod+k focus down
+# bindsym $mod+l focus right
 
 # move workspace to left output video
 bindsym $mod+m move workspace to output left
@@ -68,7 +79,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -131,8 +142,10 @@ bindsym $mod+r mode "resize"
 ###################################################################
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec light -A 5
-bindsym XF86MonBrightnessDown exec light -U 5
+# bindsym XF86MonBrightnessUp exec light -A 5
+# bindsym XF86MonBrightnessDown exec light -U 5
+bindsym $mod+k exec light -A 1
+bindsym $mod+l exec light -U 1
 
 #volume control
 bindsym XF86AudioRaiseVolume exec amixer -q -M set Master 5%+ unmute
@@ -140,7 +153,9 @@ bindsym XF86AudioLowerVolume exec amixer -q -M set Master 5%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
 # Media player controls
-bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
+# Spotify related key bindings
+bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+# bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
 bindsym XF86AudioNext exec --no-startup-id "playerctl next"
 bindsym XF86AudioPrev exec --no-startup-id "playerctl previous"
 
@@ -154,10 +169,15 @@ exec --no-startup-id compton -f
 exec --no-startup-id nm-applet
 
 # Enables redshift, to make display warmer
-exec --no-startup-id redshift -O 5000
+bindsym $mod+Shift+n exec --no-startup-id redshift -x
+bindsym $mod+n exec --no-startup-id redshift -O 4800
 
-# Set keyboard layout
-exec --no-startup-id setxkbmap br
+# Enable battery notification
+exec --no-startup-id "~/.config/i3/scripts/battery.sh -n -m 'Battery Low' &"
+
+
+# Set correct DPI for Surface Pro 6 screen
+# exec --no-startup-id xrandr --dpi 267
 
 ###################################################################
 # Windows
@@ -183,19 +203,22 @@ set $i-border-color #666666
 set $text-color     #ffffff
 set $i-text-color   #cecece
 
-exec --no-startup-id polybar main
+exec --no-startup-id polybar top
 
 # i3 gaps
-for_window [class="^.*"] border pixel 3
-gaps inner 3
-gaps outer 0
+for_window [class="^.*"] border pixel 2
+gaps inner 5
+gaps outer 5
 smart_gaps on
 smart_borders on
 
 # color scheme
-# class                 border    backgr.   text      indicator child_border
-client.focused          #eeeeee   #eeeeee   #5c5c5c   #eeeeee   #eeeeee
-client.unfocused        #eeeeee   #eeeeee   #d0d0d0   #5c5c5c00 #5c5c5c00
+# class                 border      backgr.     text      indicator   child_border
+client.focused          #eeeeee00   #eeeeee00   #ffffff   #ffffff99   #ffffff99
+client.unfocused        #eeeeee00   #eeeeee00   #a0a0a0   #5c5c5c00   #5c5c5c00
+client.focused_inactive #eeeeee00   #eeeeee00   #a0a0a0   #5c5c5c00   #5c5c5c00
+client.placeholder      #eeeeee00   #eeeeee00   #a0a0a0   #5c5c5c00   #5c5c5c00
+client.background       #ffffff
 
 focus_follows_mouse no
 
@@ -209,13 +232,13 @@ for_window [window_role="task_dialog"] floating enable;border normal
 #Open applications on specific workspaces
 
 # Wallpaper Setup
-# exec --no-startup-id feh --bg-scale /home/eduardo/.wallpapers/wp1.jpg
-exec --no-startup-id ~/.config/i3/scripts/wallpaperslide.sh
+exec --no-startup-id feh --bg-scale /home/eduardo/.wallpapers/mountain.jpg
+# exec --no-startup-id ~/.config/i3/scripts/wallpaperslide.sh
 
-# Workspace 1: Work browser
-assign [class="Google-chrome"] $ws1
-for_window [class="google-chrome"] move to workspace $ws1
-# exec --no-startup-id google-chrome-stable
+# Workspace 1: Notes
+assign [class="xournalpp"] $ws1
+for_window [class="xournalpp"] move to workspace $ws1
+# exec --no-startup-id xournalpp
 
 # Workspace 2: Development
 # exec --no-startup-id ~/Documents/profissional/curtir/scripts/todo.sh
@@ -235,8 +258,8 @@ exec --no-startup-id "i3-msg 'workspace \"4\"; append_layout ~/.config/i3/worksp
 exec --no-startup-id firefox-developer-edition
 
 # Workspace 5: Social Media (Whatsapp/Slack)
-for_window [class="whats-app"] move to workspace $ws5
-#exec whatsapp-nativefier
+assign [class="spotify"] $ws4
+for_window [class="spotify"] move to workspace $ws5
 
 # Workspace 6: Email
 # for_window [class="Geary"] move to workspace $ws6
