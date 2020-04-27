@@ -1,9 +1,10 @@
 # Work binds
-alias 'curtir'='$HOME/Documents/profissional/curtir/scripts/todo.sh'
-alias 'emacs'='emacs -nw -q --load ~/.emacs.d/shell-init.el'
+# alias 'curtir'='$HOME/Documents/work/curtir/scripts/todo.sh'
+alias 'emacs'='emacs -nw -q'
 alias 'sudo'='sudo '
 alias 'vim'='echo "comendo o cu de quem ta lendo"'
 alias 'suco'='sudo'
+
 # enable bash completion
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -36,6 +37,14 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # enable venv for working enviroment (CSC)
-alias 'venv'='source ~/Documents/profissional/curtir/csc-api/.venv/bin/activate'
-alias 'cscweb'='cd ~/Documents/profissional/curtir/csc-web/ && yarn ng serve'
-alias 'cscapi'='cd ~/Documents/profissional/curtir/csc-api/ && venv && apys -s'
+alias 'venv'='source ~/Documents/work/curtir/csc-api/.venv/bin/activate'
+alias 'cscweb'='cd ~/Documents/work/curtir/csc-web/ && git checkout v1 && yarn ng serve'
+alias 'cscapi'='cd ~/Documents/work/curtir/csc-api/ && pipenv shell && apys -s'
+
+
+# Load pyenv automatically by adding
+# the following to ~/.bashrc:
+
+#export PATH="$HOME/.pyenv/bin:$PATH"
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
