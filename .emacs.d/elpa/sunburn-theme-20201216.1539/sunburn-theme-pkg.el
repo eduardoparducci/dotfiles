@@ -1,0 +1,2 @@
+;;; Generated package description from /home/parducci/.emacs.d/elpa/sunburn-theme-20201216.1539/sunburn-theme.el  -*- no-byte-compile: t -*-
+(define-package "sunburn-theme" "20201216.1539" "A low contrast color theme" '((emacs "24")) :commit "6b5c14c76dcdfdb099102ef7a388b2f0c6f1951d" :authors '(("Martín Varela" . "martin@varela.fi")) :maintainer '("Martín Varela" . "martin@varela.fi") :url "http://github.com/mvarela/Sunburn-Theme")

@@ -1,0 +1,256 @@
+set $mod Mod4
+font pango: DejaVu Sans Bold 0
+# font pango: Roboto bold 12
+# font pango:Source Code Pro Medium 15
+
+
+###################################################################
+# Surface Features
+###################################################################
+exec --no-startup-id "~/.config/tablet-mode/autorotate"
+
+###################################################################
+# Keyboard
+###################################################################
+
+# Use international us layout
+exec --no-startup-id setxkbmap -model pc104 -layout us_intl
+bindsym $mod+Shift+l exec "~/.config/i3/scripts/keyboard.sh"
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Automatically mount external devices
+exec --no-startup-id udiskie -2 &
+
+# Enable virtual keyboard
+exec --no-startup-id onboard &
+
+# start a terminal
+bindsym $mod+Return exec "xfce4-terminal --hide-menubar"
+
+# kill focused window
+bindsym Mod1+F4 kill
+
+# lock screen
+# bindsym $mod+Shift+t exec "~/.config/i3/scripts/lock.sh &"
+bindsym $mod+Shift+t exec dde-shutdown
+
+# System power menu
+bindsym $mod+Shift+p exec "~/.config/i3/scripts/sysmenu.sh &"
+
+# Take Screenshot with printscreen key
+bindsym Print exec gscreenshot
+
+# start rofi (a program launcher)
+#bindsym $mod+space exec rofi -show combi -theme LaunchMenu
+bindsym $mod+space exec rofi -show drun -show-icons -modi drun
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus up
+# bindsym $mod+k focus down
+# bindsym $mod+l focus right
+
+# move workspace to left output video
+bindsym $mod+m move workspace to output left
+bindsym $mod+Shift+m move workspace to output right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+Shift+h split h
+
+# split in vertical orientation
+bindsym $mod+Shift+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# focus the parent container
+# bindsym $mod+a focus parent
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+# move focused container to workspace and immediately swithces to that workspace
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+###################################################################
+# Multimedia Keys
+###################################################################
+
+# Screen brightness controls
+# bindsym XF86MonBrightnessUp exec light -A 5
+# bindsym XF86MonBrightnessDown exec light -U 5
+bindsym $mod+k exec light -A 1
+bindsym $mod+l exec light -U 1
+
+#volume control
+bindsym XF86AudioRaiseVolume exec amixer -q -M set Master 5%+ unmute
+bindsym XF86AudioLowerVolume exec amixer -q -M set Master 5%- unmute
+bindsym XF86AudioMute exec amixer -q set Master toggle
+
+# Media player controls
+# Spotify related key bindings
+bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+# bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
+bindsym XF86AudioNext exec --no-startup-id "playerctl next"
+bindsym XF86AudioPrev exec --no-startup-id "playerctl previous"
+
+###################################################################
+# System
+###################################################################
+# Composite manager
+# exec --no-startup-id compton -f
+exec --no-startup-id picom -f
+
+# Network manger GUI
+exec --no-startup-id nm-applet
+
+# Enables redshift, to make display warmer
+exec --no-startup-id redshift
+# bindsym $mod+Shift+n exec --no-startup-id redshift -x
+# bindsym $mod+n exec --no-startup-id redshift -O 4800
+
+# Enable battery notification
+exec --no-startup-id "~/.config/i3/scripts/battery.sh -n -m 'Battery Low' &"
+
+# Set correct DPI for Surface Pro 6 screen
+# exec --no-startup-id xrandr --dpi 267
+
+###################################################################
+# Windows
+###################################################################
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+set $wsNull desktop
+
+#Define colors used
+# set $bg		#222222
+set $bg		#8026272B
+set $bg-alt	#444444
+set $fg		#dfdfdf
+set $fg-alt	#555555
+# set $primary	#ffd180ff
+set $primary	#677D28ff
+
+set $secondary	#ffd180ff
+set $alert	#ffd180ff
+set $success	#1db954
+set $transp	#00000000
+set $like-transp #B4E3FD00
+exec --no-startup-id polybar top
+
+# i3 gaps
+for_window [class="^.*"] border pixel 2
+gaps inner 5
+gaps outer 5
+smart_gaps on
+smart_borders on
+hide_edge_borders smart
+focus_follows_mouse no
+
+# color scheme
+# class                 border          backgr.         text      indicator     child_border
+client.focused          $primary        $primary	$fg	  $bg	        $primary
+client.unfocused        $like-transp	$like-transp	$fg-alt   $like-transp  $like-transp
+client.focused_inactive $like-transp	$like-transp	$fg       $like-transp  $like-transp
+client.placeholder      #000000         #0c0c0c         #ffffff   #000000       #0c0c0c
+client.background       #ffffff
+
+# Enables popup window.
+for_window [window_role="pop-up"] floating enable;border normal
+for_window [window_role="task_dialog"] floating enable;border normal
+
+###################################################################
+# Apps
+###################################################################
+
+# Automatically mount SD card
+exec --no-startup-id udisksctl mount -b /dev/sda1
+
+# Wallpaper Setup
+exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/vintage.jpg
+# exec --no-startup-id ~/.config/i3/scripts/wallpaperslide.sh
+
+
+# exec --no-startup-id ~/scripts/spotify/launchlistener.sh
